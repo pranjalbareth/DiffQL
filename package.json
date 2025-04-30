@@ -1,14 +1,25 @@
 {
   "name": "diffql",
-  "version": "1.0.0",
-  "description": "GraphQL Diff Checker",
-  "main": "index.js",
+  "version": "1.0.1",
+  "description": "GraphQL schema diff CLI tool",
+  "main": "src/index.js",
+  "bin": {
+    "diffql": "./src/index.js"
+  },
   "directories": {
     "test": "tests"
   },
   "scripts": {
     "test": "jest"
   },
+  "keywords": [
+    "graphql",
+    "schema",
+    "diff",
+    "cli",
+    "breaking-changes",
+    "schema-checker"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pranjalbareth/diffql.git"
