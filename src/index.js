@@ -1,21 +1,29 @@
 #!/usr/bin/env node
 
 const { compareSchemas } = require('./diffEngine');
-const path = require('path');
+const chalk = require('chalk');
 
-const oldSchemaPath = path.resolve(process.argv[2]);
-const newSchemaPath = path.resolve(process.argv[3]);
-
-if (!oldSchemaPath || !newSchemaPath) {
-    console.error('Please provide paths to two GraphQL schema files.');
+const args = process.argv.slice(2);
+if (args.length < 2) {
+    console.log(chalk.red('[i] Please provide paths to old and new schema files.'));
     process.exit(1);
 }
 
-const diffs = compareSchemas(oldSchemaPath, newSchemaPath);
+const [oldPath, newPath] = args;
 
-if (diffs.length > 0) {
-    console.log('Differences between schemas:');
-    diffs.forEach(diff => console.log(diff));
-} else {
-    console.log('No differences found.');
+const diffs = compareSchemas(oldPath, newPath);
+
+if (diffs.length === 0) {
+    console.log(chalk.greenBright('[✓] No changes detected between the schemas.'));
+    process.exit(0);
 }
+
+console.log(chalk.bold.underline('\nSchema Diff Results:\n'));
+
+diffs.forEach(diff => {
+    if (diff.startsWith('Breaking')) {
+        console.log(`${chalk.red('[i]')} ${chalk.red(diff)}`);
+    } else {
+        console.log(`${chalk.green('[√]')} ${chalk.green(diff)}`);
+    }
+});
