@@ -57,9 +57,6 @@ node src/index.js ./schemas/oldSchema.graphql ./schemas/newSchema.graphql
 - ⚙️ Custom rule engine via config file
 - 🕘 Schema version history & timeline
 - 🧠 Smart impact analysis
-- 💻 VSCode extension
-- 🌐 Web-based visual diff tool
-- ☁️ Cloud dashboard + Slack integration
 
 ---
 
